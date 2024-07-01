@@ -1,10 +1,13 @@
 package com.project.shopapp.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.shopapp.models.Order;
+import com.project.shopapp.models.OrderDetail;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -13,7 +16,7 @@ public class OrderResponse extends BaseResponse{
     private Long id;
 
     @JsonProperty("user_id")
-    private String userId;
+    private Long userId;
 
     @JsonProperty("fullname")
     private String fullName;
@@ -21,13 +24,16 @@ public class OrderResponse extends BaseResponse{
     @JsonProperty("phone_number")
     private String phoneNumber;
 
+    @JsonProperty("address")
     private String address;
 
+    @JsonProperty("note")
     private String note;
 
     @JsonProperty("order_date")
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
 
+    @JsonProperty("status")
     private String status;
 
     @JsonProperty("total_money")
@@ -40,7 +46,7 @@ public class OrderResponse extends BaseResponse{
     private String shippingAddress;
 
     @JsonProperty("shipping_date")
-    private Date shippingDate;
+    private LocalDate shippingDate;
 
     @JsonProperty("tracking_number")
     private String trackingNumber;
@@ -48,6 +54,29 @@ public class OrderResponse extends BaseResponse{
     @JsonProperty("payment_method")
     private String paymentMethod;
 
+    @JsonProperty("order_detail")
+    private List<OrderDetail> orderDetails;
+
     @JsonProperty("active")
     private Boolean active;
+
+    public static OrderResponse fromOrder(Order order){
+        OrderResponse orderResponse = OrderResponse.builder()
+                .id(order.getId())
+                .userId(order.getUser().getId())
+                .fullName(order.getFullName())
+                .phoneNumber(order.getPhoneNumber())
+                .address(order.getAddress())
+                .note(order.getNote())
+                .status(order.getStatus())
+                .shippingMethod(order.getShippingMethod())
+                .shippingAddress(order.getShippingAddress())
+                .trackingNumber(order.getTrackingNumber())
+                .paymentMethod(order.getPaymentMethod())
+                .orderDate(order.getOrderDate())
+                .orderDetails(order.getOrderDetails())
+                .active(order.getActive())
+                .build();
+        return orderResponse;
+    }
 }
