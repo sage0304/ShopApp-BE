@@ -6,7 +6,6 @@ import com.project.shopapp.models.OrderDetail;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -20,6 +19,9 @@ public class OrderResponse extends BaseResponse{
 
     @JsonProperty("fullname")
     private String fullName;
+
+    @JsonProperty("email")
+    private String email;
 
     @JsonProperty("phone_number")
     private String phoneNumber;
@@ -65,6 +67,7 @@ public class OrderResponse extends BaseResponse{
                 .id(order.getId())
                 .userId(order.getUser().getId())
                 .fullName(order.getFullName())
+                .email(order.getEmail())
                 .phoneNumber(order.getPhoneNumber())
                 .address(order.getAddress())
                 .note(order.getNote())
