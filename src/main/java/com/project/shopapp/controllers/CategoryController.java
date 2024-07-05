@@ -6,7 +6,6 @@ import com.project.shopapp.models.Category;
 import com.project.shopapp.responses.CategoryResponse;
 import com.project.shopapp.services.Category.CategoryService;
 import com.project.shopapp.utils.MessageKeys;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("${api.prefix}/categories")

@@ -5,6 +5,7 @@ import com.project.shopapp.dtos.UserLoginDTO;
 import com.project.shopapp.models.User;
 import com.project.shopapp.responses.LoginResponse;
 import com.project.shopapp.responses.RegisterResponse;
+import com.project.shopapp.responses.UserResponse;
 import com.project.shopapp.services.User.UserService;
 import com.project.shopapp.components.LocalizationUtils;
 import com.project.shopapp.utils.MessageKeys;
@@ -60,7 +61,10 @@ public class UserController {
     ) {
         try {
             // Check login request and create token
-            String token = userService.login(userLoginDTO.getPhoneNumber(), userLoginDTO.getPassword());
+            String token = userService.login(
+                    userLoginDTO.getPhoneNumber(),
+                    userLoginDTO.getPassword(),
+                    userLoginDTO.getRoleId() == null ? 1 : userLoginDTO.getRoleId());
             // Response token
             return ResponseEntity.ok(LoginResponse.builder()
                     .message(localizationUtils.getLocalizedMessage(MessageKeys.LOGIN_SUCCESSFULLY))
@@ -71,6 +75,18 @@ public class UserController {
             return ResponseEntity.badRequest().body(LoginResponse.builder()
                     .message(localizationUtils.getLocalizedMessage(MessageKeys.LOGIN_FAILED, e.getMessage()))
                     .build());
+        }
+    }
+
+    @PostMapping("/details")
+    public ResponseEntity<UserResponse> getUserDetails(@RequestHeader("Authorization") String token){
+        try {
+            String extractedToken = token.substring(7);
+            User user = userService.getUserDetailsFromToken(extractedToken);
+            return ResponseEntity.ok(UserResponse.fromUser(user));
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().build();
         }
     }
 }
