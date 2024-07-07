@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderResponse extends BaseResponse{
+    @JsonProperty("id")
     private Long id;
 
     @JsonProperty("user_id")

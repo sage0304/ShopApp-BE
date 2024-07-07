@@ -96,7 +96,7 @@ public class OrderController {
 
     @GetMapping("/get-orders-by-keyword")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<OrderListResponse> getOrdersByWord(
+    public ResponseEntity<OrderListResponse> getOrdersByKeyword(
             @RequestParam(defaultValue = "", required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int limit
