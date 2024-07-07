@@ -72,6 +72,7 @@ public class OrderResponse extends BaseResponse{
                 .address(order.getAddress())
                 .note(order.getNote())
                 .status(order.getStatus())
+                .totalMoney(order.getTotalMoney())
                 .shippingMethod(order.getShippingMethod())
                 .shippingAddress(order.getShippingAddress())
                 .trackingNumber(order.getTrackingNumber())
