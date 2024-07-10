@@ -38,6 +38,9 @@ public class OrderDTO {
     @Min(value = 0, message = "Total money must be >= 0")
     private Float totalMoney;
 
+    @JsonProperty("tracking_number")
+    private String trackingNumber;
+
     @JsonProperty("shipping_method")
     private String shippingMethod;
 
@@ -49,6 +52,12 @@ public class OrderDTO {
 
     @JsonProperty("payment_method")
     private String paymentMethod;
+
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("order_date")
+    private LocalDate orderDate;
 
     @JsonProperty("cart_items")
     private List<CartItemDTO> cartItems;

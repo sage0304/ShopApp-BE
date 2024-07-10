@@ -101,7 +101,7 @@ public class WebSecurityConfig {
                                     String.format("%s/order_details/**", apiPrefix)).hasRole(Role.USER)
 
                             .requestMatchers(HttpMethod.GET,
-                                    String.format("%s/order_details/**", apiPrefix)).hasAnyRole(Role.USER, Role.ADMIN)
+                                    String.format("%s/order_details/**", apiPrefix)).permitAll()
 
                             .requestMatchers(HttpMethod.PUT,
                                     String.format("%s/order_details/**", apiPrefix)).hasRole(Role.ADMIN)
